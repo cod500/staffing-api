@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
         const token = authHeader.substring(3)
 
         if (!token) return res.sendStatus(401);
-        jwt.verify(token, 'secret', (error, user) => {
+        jwt.verify(token, process.env.SECRET, (error, user) => {
             if (error) return res.sendStatus(403)
             next();
         })
