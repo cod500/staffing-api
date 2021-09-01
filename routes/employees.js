@@ -15,7 +15,7 @@ router.get("/all-shifts", async (req, res, next) => {
     }
 });
 
-router.get("/shift-details/:id", async (req, res, next) => {
+router.get("/shift-details/:id", checkAuth, async (req, res, next) => {
     try {
         const employee = await Employee.find({ _id: req.params.id });
         console.log(employee)
@@ -27,7 +27,7 @@ router.get("/shift-details/:id", async (req, res, next) => {
     }
 });
 
-router.post("/add-shift", async (req, res, next) => {
+router.post("/add-shift", checkAuth, async (req, res, next) => {
     try {
         const employee = new Employee({
             _id: new mongoose.Types.ObjectId(),
@@ -48,7 +48,7 @@ router.post("/add-shift", async (req, res, next) => {
     }
 });
 
-router.patch("/update-shift/:id", async (req, res, next) => {
+router.patch("/update-shift/:id", checkAuth, async (req, res, next) => {
     try {
 
         const id = req.params.id;
@@ -65,7 +65,7 @@ router.patch("/update-shift/:id", async (req, res, next) => {
     };
 });
 
-router.delete("/delete-shift/:id", async (req, res, next) => {
+router.delete("/delete-shift/:id", checkAuth, async (req, res, next) => {
     try {
 
         const id = req.params.id;
